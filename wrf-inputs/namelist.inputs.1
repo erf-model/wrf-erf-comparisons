@@ -1,0 +1,169 @@
+&time_control
+ run_days                  = 0,
+ run_hours                 = 0,
+ run_minutes               = 0,
+ run_seconds               = 5, ! max_step=4000
+ start_year                = 2013,
+ start_month               = 11,
+ start_day                 = 08,
+ start_hour                = 14,
+ start_minute              = 00,
+ start_second              = 00,
+ end_year                  = 2020,
+ end_month                 = 11,
+ end_day                   = 08,
+ end_hour                  = 18,
+ end_minute                = 00,
+ end_second                = 00,
+ interval_seconds          = 10800
+ restart                   = .false.,
+ restart_interval_m        = 60 
+ io_form_history           = 2
+ io_form_restart           = 2
+ io_form_input             = 2
+ io_form_boundary          = 2
+ debug_level               = 0
+ history_interval_m        = 3000,     10,   
+ frames_per_outfile        = 1,      1,  
+ override_restart_timers   = .true., 
+ write_hist_at_0h_rst      = .false.,
+ ignore_iofields_warning   = .true.,
+/
+
+&domains
+ time_step                 = 0, ! fixed_dt = 0 + 1/10 = 0.1 s
+ time_step_fract_num       = 1, 
+ time_step_fract_den       = 20,
+ max_dom                   = 1,
+ s_we                      = 1,
+ e_we                      = 32,
+ s_sn                      = 1,
+ e_sn                      = 32,
+ s_vert                    = 1,
+ e_vert                    = 128,
+ vert_refine_method        = 0,
+ dx                        = 16.0,
+ dy                        = 16.0,
+ grid_id                   = 1,
+ parent_id                 = 1,
+ i_parent_start            = 1,
+ j_parent_start            = 1,
+ parent_grid_ratio         = 1,
+ parent_time_step_ratio    = 1,
+ ztop                      = 1606.5122,
+ hypsometric_opt           = 2,
+ feedback                  = 0,
+ smooth_option             = 0,
+ !nproc_x                   = 8,
+ !nproc_y                   = 5,
+ max_ts_locs               = 200,
+ max_ts_level              = 88,
+! WRF automatically sets eta_levels
+! eta_levels   = 1.00000,  0.99727,  0.99440,  0.99139,
+!                0.98823,  0.98492,  0.98144,  0.97779,
+!                0.97396,  0.96994,  0.96573,  0.96130,
+!                0.95666,  0.95179,  0.94669,  0.94133,
+!                0.93571,  0.92981,  0.92362,  0.91714,
+!                0.91033,  0.90320,  0.89572,  0.88787,
+!                0.87965,  0.87102,  0.86198,  0.85250,
+!                0.84257,  0.83216,  0.82124,  0.80981,
+!                0.79782,  0.78527,  0.77212,  0.75834,
+!                0.74391,  0.72881,  0.71320,  0.69763,
+!                0.68211,  0.66664,  0.65120,  0.63581,
+!                0.62047,  0.60516,  0.58990,  0.57469,
+!                0.55952,  0.54438,  0.52930,  0.51425,
+!                0.49925,  0.48429,  0.46937,  0.45449,
+!                0.43966,  0.42487,  0.41012,  0.39541,
+!                0.38074,  0.36611,  0.35153,  0.33699,
+!                0.32248,  0.30802,  0.29360,  0.27922,
+!                0.26488,  0.25058,  0.23633,  0.22211,
+!                0.20793,  0.19379,  0.17969,  0.16564,
+!                0.15162,  0.13764,  0.12370,  0.10980,
+!                0.09594,  0.08212,  0.06833,  0.05459,
+!                0.04088,  0.02722,  0.01359,  0.00000,
+ /
+
+&physics
+ mp_physics                = 0,    
+ ra_lw_physics             = 0,   
+ ra_sw_physics             = 0,  
+ radt                      = 0, 
+ sf_sfclay_physics         = 1, ! revised MM5 surface layer scheme, Jimenez et al. MWR 2012
+ sf_surface_physics        = 0, ! no surface temperature prediction
+ bl_pbl_physics            = 0, ! no PBL scheme (LES)
+ bldt                      = 0, 
+ cu_physics                = 0, 
+ cudt                      = 0, 
+ isfflx                    = 1,
+ ifsnow                    = 0,
+ icloud                    = 0,
+ /
+
+&ideal
+ ideal_case                = 9    
+!ideal_case                = 1
+/
+
+&fdda
+/
+
+&dynamics
+ rk_ord                    = 3,
+ diff_opt                  = 2, ! full diffusion (for LES)
+ km_opt                    = 3, ! Smagorinsky
+ m_opt                     = 1, 
+ sfs_opt                   = 0, 
+ c_s                       = 0.1, ! Smagorinsky coefficient
+ tke_heat_flux             = 0.0,
+ tke_drag_coefficient      = 0.0,
+ diff_6th_opt              = 0,  
+ diff_6th_factor           = 0.12,
+ base_temp                 = 300.
+ w_damping                 = 0,  ! vertical-velocity damping
+ damp_opt                  = 0,  ! no upper-level damping
+ zdamp                     = 400.0,
+ dampcoef                  = 0.2, 
+ khdif                     = 0,  
+ kvdif                     = 0,  
+ non_hydrostatic           = .true., 
+ moist_adv_opt             = 1,    
+ scalar_adv_opt            = 1,   
+ tke_adv_opt               = 1,  
+ h_mom_adv_order           = 5, 
+ v_mom_adv_order           = 3, 
+ h_sca_adv_order           = 5, 
+ v_sca_adv_order           = 3, 
+ mix_isotropic             = 1, 
+ smdiv                     = 0.1, 
+ emdiv                     = 0.01, 
+ mix_full_fields           = .true., 
+ non_hydrostatic           = .true.,
+ pert_coriolis             = .true.,
+ use_baseparam_fr_nml      = .true.,
+!spec_init_perts           = .false.,
+!spec_ideal                = 1,
+!spec_hfx                  = 175.0,
+!spec_sf_heatrate          = 0.0,
+!spec_z0                   = 0.03,
+!spec_lat                  = 33.6,
+ /
+ 
+&bdy_control
+ periodic_x                = .true.
+ symmetric_xs              = .false.
+ symmetric_xe              = .false.
+ open_xs                   = .false.
+ open_xe                   = .false.
+ periodic_y                = .true.,
+ symmetric_ys              = .false.
+ symmetric_ye              = .false.
+ open_ys                   = .false.
+ open_ye                   = .false.
+ nested                    = .false.
+/
+
+ &namelist_quilt
+ nio_tasks_per_group       = 0,
+ nio_groups                = 1,
+ /
+
